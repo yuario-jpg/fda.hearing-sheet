@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -253,6 +254,16 @@
       border: 1px solid #f5c6cb;
     }
 
+    .draft-notice {
+      background: #eef4f9;
+      border: 1px solid #b8cce0;
+      color: #003366;
+      padding: 10px 12px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+
     @media (max-width: 640px) {
       body {
         padding: 10px;
@@ -286,6 +297,7 @@
 
     <form id="fdaForm" action="#" method="POST">
       <div class="notice">※「*」は必須項目です。</div>
+      <div class="draft-notice">途中まで入力した内容は、このブラウザに一時保存できます。ページを閉じても、同じブラウザで開けば再編集できます。</div>
 
       <h2>企業情報</h2>
 
@@ -435,6 +447,8 @@
       </div>
 
       <div class="btn-container">
+        <button type="button" id="saveDraftButton" style="background:#6c757d; margin-right:8px;">一時保存する</button>
+        <button type="button" id="clearDraftButton" style="background:#999; margin-right:8px;">一時保存を削除</button>
         <button type="submit" id="submitButton">この内容で送信する</button>
         <div id="resultMessage" class="result-message"></div>
       </div>
@@ -609,6 +623,114 @@
       return data;
     }
 
+
+    const DRAFT_STORAGE_KEY = 'fda_hearing_sheet_draft_v1';
+    const saveDraftButton = document.getElementById('saveDraftButton');
+    const clearDraftButton = document.getElementById('clearDraftButton');
+
+    function getCurrentFormState() {
+      const form = document.getElementById('fdaForm');
+      const state = {
+        values: {},
+        checked: {},
+        productCount: productCountSelect.value,
+        productUndecided: productUndecided.checked
+      };
+
+      const fields = form.querySelectorAll('input, textarea, select');
+      fields.forEach(field => {
+        if (!field.name && !field.id) return;
+        const key = field.name || field.id;
+
+        if (field.type === 'checkbox' || field.type === 'radio') {
+          if (!state.checked[key]) state.checked[key] = [];
+          if (field.checked) state.checked[key].push(field.value);
+        } else {
+          state.values[key] = field.value;
+        }
+      });
+
+      return state;
+    }
+
+    function applyFormState(state) {
+      if (!state) return;
+
+      const count = state.productCount || '1';
+      productCountSelect.value = count;
+      renderProductBlocks(parseInt(count, 10));
+
+      productUndecided.checked = !!state.productUndecided;
+
+      const form = document.getElementById('fdaForm');
+      const fields = form.querySelectorAll('input, textarea, select');
+
+      fields.forEach(field => {
+        if (!field.name && !field.id) return;
+        const key = field.name || field.id;
+
+        if (field.type === 'checkbox' || field.type === 'radio') {
+          const selectedValues = state.checked[key] || [];
+          field.checked = selectedValues.includes(field.value);
+        } else if (Object.prototype.hasOwnProperty.call(state.values, key)) {
+          field.value = state.values[key];
+        }
+      });
+
+      updateExperienceFields();
+      updateProductUndecided();
+
+      ['reqOtherCheckbox', 'issueCheckbox', 'issueOtherCheckbox', 'supportOtherCheckbox'].forEach(id => {
+        const checkbox = document.getElementById(id);
+        if (checkbox) checkbox.dispatchEvent(new Event('change'));
+      });
+    }
+
+    function saveDraft(showMessage = false) {
+      const state = getCurrentFormState();
+      localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(state));
+
+      if (showMessage) {
+        const resultMessage = document.getElementById('resultMessage');
+        resultMessage.className = 'result-message success';
+        resultMessage.textContent = '入力内容を一時保存しました。';
+      }
+    }
+
+    function loadDraftIfExists() {
+      const saved = localStorage.getItem(DRAFT_STORAGE_KEY);
+      if (!saved) return;
+
+      try {
+        const state = JSON.parse(saved);
+        applyFormState(state);
+
+        const resultMessage = document.getElementById('resultMessage');
+        resultMessage.className = 'result-message success';
+        resultMessage.textContent = '一時保存された入力内容を復元しました。';
+      } catch (error) {
+        console.error('Draft restore failed:', error);
+      }
+    }
+
+    saveDraftButton.addEventListener('click', () => saveDraft(true));
+
+    clearDraftButton.addEventListener('click', () => {
+      localStorage.removeItem(DRAFT_STORAGE_KEY);
+      const resultMessage = document.getElementById('resultMessage');
+      resultMessage.className = 'result-message success';
+      resultMessage.textContent = '一時保存データを削除しました。';
+    });
+
+    document.getElementById('fdaForm').addEventListener('input', () => {
+      saveDraft(false);
+    });
+
+    document.getElementById('fdaForm').addEventListener('change', () => {
+      saveDraft(false);
+    });
+
+
     document.getElementById('fdaForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -635,6 +757,7 @@
 
         resultMessage.className = 'result-message success';
         resultMessage.textContent = '送信が完了しました。ご入力ありがとうございます。';
+        localStorage.removeItem(DRAFT_STORAGE_KEY);
 
         form.reset();
         productCountSelect.value = '1';
@@ -656,6 +779,7 @@
     updateExperienceFields();
     renderProductBlocks(1);
     updateProductUndecided();
+    loadDraftIfExists();
   </script>
 </body>
 </html>
