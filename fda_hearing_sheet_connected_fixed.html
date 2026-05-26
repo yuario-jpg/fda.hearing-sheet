@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FDA無料相談 ヒアリングシート</title>
+  <style>
+    :root {
+      --primary-color: #003366;
+      --primary-dark: #002244;
+      --accent-color: #d9534f;
+      --bg-color: #f8f9fa;
+      --border-color: #ccc;
+      --soft-blue: #eef4f9;
+      --text-color: #333;
+      --muted-color: #666;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary-color);
+      margin: 0 0 12px;
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .lead {
+      text-align: center;
+      color: var(--muted-color);
+      margin: 0 0 30px;
+      font-size: 0.95rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      color: var(--primary-color);
+      background: var(--soft-blue);
+      padding: 10px;
+      border-left: 5px solid var(--primary-color);
+      margin-top: 34px;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label,
+    .question-label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .required::after {
+      content: " *";
+      color: var(--accent-color);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 1rem;
+      background: #fff;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.12);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .checkbox-group,
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .checkbox-label,
+    .radio-label {
+      display: flex;
+      align-items: flex-start;
+      font-weight: normal;
+      cursor: pointer;
+      line-height: 1.55;
+    }
+
+    .checkbox-label input,
+    .radio-label input {
+      margin-top: 5px;
+      margin-right: 10px;
+      flex: 0 0 auto;
+    }
+
+    .conditional-fields {
+      display: none;
+      background: #f9f9f9;
+      padding: 15px;
+      border: 1px dashed var(--border-color);
+      border-radius: 4px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .product-block {
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 6px;
+      background: #fff;
+      margin-bottom: 20px;
+    }
+
+    .product-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      color: #555;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 5px;
+    }
+
+    .hint {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted-color);
+      margin-top: 2px;
+      font-weight: normal;
+    }
+
+    .inline-hint {
+      font-size: 0.85rem;
+      color: var(--muted-color);
+      margin-left: 8px;
+    }
+
+    .undecided-box {
+      background: #f9f9f9;
+      border: 1px dashed var(--border-color);
+      border-radius: 4px;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+    }
+
+    .is-disabled {
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .notice {
+      background: #fff8e6;
+      border: 1px solid #f1d48a;
+      border-radius: 4px;
+      padding: 12px 14px;
+      color: #5c4611;
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 10px;
+    }
+
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.15s;
+    }
+
+    button:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .small-input-wrap {
+      padding-left: 24px;
+      margin-top: 5px;
+    }
+
+    .result-message {
+      display: none;
+      margin-top: 18px;
+      padding: 12px 14px;
+      border-radius: 4px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .result-message.success {
+      display: block;
+      background: #e8f5e9;
+      color: #1b5e20;
+      border: 1px solid #a5d6a7;
+    }
+
+    .result-message.error {
+      display: block;
+      background: #fdecea;
+      color: #b71c1c;
+      border: 1px solid #f5c6cb;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 10px;
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.55rem;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      .inline-hint {
+        display: block;
+        margin-left: 0;
+        margin-top: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>FDA無料相談 ヒアリングシート</h1>
+    <p class="lead">無料相談をスムーズに進めるため、分かる範囲でご入力ください。</p>
+
+    <form id="fdaForm" action="#" method="POST">
+      <div class="notice">※「*」は必須項目です。</div>
+
+      <h2>企業情報</h2>
+
+      <div class="form-group">
+        <label for="companyName" class="required">会社名</label>
+        <input type="text" id="companyName" name="company_name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="homepageUrl">ホームページURL</label>
+        <input type="url" id="homepageUrl" name="homepage_url" placeholder="https://example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="managerName" class="required">担当者名</label>
+        <input type="text" id="managerName" name="manager_name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="telephone">電話番号</label>
+        <input type="tel" id="telephone" name="telephone" placeholder="例：03-0000-0000">
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="required">メールアドレス</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="location" class="required">会社所在地</label>
+        <input type="text" id="location" name="location" required>
+      </div>
+
+      <h2>現時点のご不安・要望（複数選択可）</h2>
+
+      <div class="form-group checkbox-group">
+        <label class="checkbox-label"><input type="checkbox" name="requests" value="輸出予定の商品がFDA認証の対象かどうか分からない">輸出予定の商品がFDA認証の対象かどうか分からない</label>
+        <label class="checkbox-label"><input type="checkbox" name="requests" value="FDA認証を取得するために何をすれば良いか分からない">FDA認証を取得するために何をすれば良いか分からない</label>
+        <label class="checkbox-label"><input type="checkbox" name="requests" value="認証取得の業務を代行してほしい">認証取得の業務を代行してほしい</label>
+        <label class="checkbox-label"><input type="checkbox" name="requests" value="既に認証は取得しているが、施設登録の更新や乗り換えを検討している">既に認証は取得しているが、施設登録の更新や乗り換えを検討している</label>
+        <label class="checkbox-label"><input type="checkbox" name="requests" value="ラベル表記や成分表示の作成を依頼したい">ラベル表記や成分表示の作成を依頼したい</label>
+        <label class="checkbox-label"><input type="checkbox" name="requests" value="輸出時の規制等がわからない">輸出時の規制等がわからない</label>
+        <label class="checkbox-label"><input type="checkbox" name="requests" value="輸出に伴う作業などをすべて依頼したい">輸出に伴う作業などをすべて依頼したい</label>
+        <label class="checkbox-label"><input type="checkbox" name="requests" value="費用や期間の目安を把握したい">費用や期間の目安を把握したい</label>
+        <label class="checkbox-label"><input type="checkbox" name="requests" value="その他" id="reqOtherCheckbox">その他</label>
+        <textarea id="reqOtherText" name="requests_other" placeholder="その他のご不安・ご要望をご記載ください。" style="display:none; margin-top:5px;"></textarea>
+      </div>
+
+      <h2>FDA認証取得経験</h2>
+
+      <div class="form-group">
+        <label class="required">これまでに、FDA認証に関してどのようなご対応をされたことがありますか？</label>
+        <div class="radio-group" id="experienceGroup">
+          <label class="radio-label"><input type="radio" name="experience" value="実際に認証取得のための業務を行ったことがある" required>実際に認証取得のための業務を行ったことがある</label>
+          <label class="radio-label"><input type="radio" name="experience" value="情報収集はしたことがある" checked>情報収集はしたことがある</label>
+          <label class="radio-label"><input type="radio" name="experience" value="まだ特に対応はしていない">まだ特に対応はしていない</label>
+        </div>
+      </div>
+
+      <div id="fieldExperienceOnly" class="conditional-fields">
+        <div class="form-group">
+          <label>「実際に認証取得のための業務を行ったことがある」とお答えの方へ<br>その際はどのように対応されましたか？</label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="how_responded" value="自社で対応した">自社で対応した</label>
+            <label class="radio-label"><input type="radio" name="how_responded" value="他社に依頼した">他社に依頼した</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="fieldInfoOrExperience" class="conditional-fields">
+        <div class="form-group">
+          <label>「業務を行ったことがある」または「情報収集はしたことがある」とお答えの方へ<br>その後の状況や課題について教えてください。</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label"><input type="checkbox" name="status_issue" value="無事に認証取得できた">無事に認証取得できた</label>
+            <label class="checkbox-label"><input type="checkbox" name="status_issue" value="課題があり、取得できなかった" id="issueCheckbox">課題があり、取得できなかった</label>
+
+            <div id="issueReasonField" class="small-input-wrap" style="display:none;">
+              <label for="issueReason">↳ 理由を具体的にご記載ください。</label>
+              <input type="text" id="issueReason" name="issue_reason">
+            </div>
+
+            <label class="checkbox-label"><input type="checkbox" name="status_issue" value="情報は集めたが、内容が複雑でよく分からなかった">情報は集めたが、内容が複雑でよく分からなかった</label>
+            <label class="checkbox-label"><input type="checkbox" name="status_issue" value="その他" id="issueOtherCheckbox">その他</label>
+            <input type="text" id="issueOtherText" name="issue_status_other" placeholder="ご記載ください" style="display:none; margin-top:5px;">
+          </div>
+        </div>
+      </div>
+
+      <h2>今後のご希望</h2>
+
+      <div class="form-group">
+        <label for="desiredTime">認証取得や輸出開始を希望する時期</label>
+        <input type="text" id="desiredTime" name="desired_time" placeholder="例：〇年〇月頃まで">
+      </div>
+
+      <div class="form-group">
+        <label class="required">必要な支援範囲（複数選択可）</label>
+        <div class="checkbox-group">
+          <label class="checkbox-label"><input type="checkbox" name="support_scope" value="認証取得に関する全て" checked>認証取得に関する全て</label>
+          <label class="checkbox-label"><input type="checkbox" name="support_scope" value="成分調査">成分調査</label>
+          <label class="checkbox-label"><input type="checkbox" name="support_scope" value="施設登録">施設登録</label>
+          <label class="checkbox-label"><input type="checkbox" name="support_scope" value="ラベル作成・サポート">ラベル作成・サポート</label>
+          <label class="checkbox-label"><input type="checkbox" name="support_scope" value="事前申告">事前申告</label>
+          <label class="checkbox-label"><input type="checkbox" name="support_scope" value="認証＋輸送まで一貫サポート">認証＋輸送まで一貫サポート</label>
+          <label class="checkbox-label"><input type="checkbox" name="support_scope" value="施設更新">施設更新</label>
+          <label class="checkbox-label"><input type="checkbox" name="support_scope" value="米Amazon新規アカウント作成～出荷まで">米Amazon新規アカウント作成～出荷まで</label>
+          <label class="checkbox-label"><input type="checkbox" name="support_scope" value="米Amazon商品ページ作成のみ">米Amazon商品ページ作成のみ</label>
+          <label class="checkbox-label"><input type="checkbox" name="support_scope" value="米AmazonFBA向けの物流代行">米AmazonFBA向けの物流代行</label>
+          <label class="checkbox-label"><input type="checkbox" name="support_scope" value="その他" id="supportOtherCheckbox">その他</label>
+          <input type="text" id="supportOtherText" name="support_scope_other" placeholder="ご記載ください" style="display:none; margin-top:5px;">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="freeConsultation">無料相談で知りたいこと / 解決したいこと / ご要望</label>
+        <textarea id="freeConsultation" name="free_consultation" placeholder="なんでもご記載ください。"></textarea>
+      </div>
+
+      <h2>商品情報</h2>
+
+      <div class="undecided-box">
+        <label class="checkbox-label">
+          <input type="checkbox" id="productUndecided" name="product_undecided" value="未定">
+          商品情報は未定
+        </label>
+        <span class="hint">※とりあえず話だけ聞きたい場合はこちらを選択してください。</span>
+      </div>
+
+      <div id="productInputArea">
+        <div class="form-group">
+          <label for="productCount" class="required">商材数</label>
+          <select id="productCount" name="product_count" style="width:auto; display:inline-block;">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+
+        <div id="productFieldsContainer"></div>
+      </div>
+
+      <div class="btn-container">
+        <button type="submit" id="submitButton">この内容で送信する</button>
+        <div id="resultMessage" class="result-message"></div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyLYOwkg3YDIyy00OsZOdfTzXxATh4kkAdk8sMA6qrxdP35gL2ykwGXqL65DBiawSzGjQ/exec';
+
+    const expRadios = document.querySelectorAll('input[name="experience"]');
+    const fieldExpOnly = document.getElementById('fieldExperienceOnly');
+    const fieldInfoOrExp = document.getElementById('fieldInfoOrExperience');
+    const productCountSelect = document.getElementById('productCount');
+    const container = document.getElementById('productFieldsContainer');
+    const productUndecided = document.getElementById('productUndecided');
+    const productInputArea = document.getElementById('productInputArea');
+
+    function updateExperienceFields() {
+      const selected = document.querySelector('input[name="experience"]:checked');
+      if (!selected) return;
+
+      if (selected.value === '実際に認証取得のための業務を行ったことがある') {
+        fieldExpOnly.style.display = 'block';
+        fieldInfoOrExp.style.display = 'block';
+      } else if (selected.value === '情報収集はしたことがある') {
+        fieldExpOnly.style.display = 'none';
+        fieldInfoOrExp.style.display = 'block';
+      } else {
+        fieldExpOnly.style.display = 'none';
+        fieldInfoOrExp.style.display = 'none';
+      }
+    }
+
+    expRadios.forEach(radio => {
+      radio.addEventListener('change', updateExperienceFields);
+    });
+
+    function toggleSubField(checkboxId, fieldId, displayType = 'block') {
+      const checkbox = document.getElementById(checkboxId);
+      const field = document.getElementById(fieldId);
+      if (!checkbox || !field) return;
+
+      checkbox.addEventListener('change', () => {
+        field.style.display = checkbox.checked ? displayType : 'none';
+      });
+    }
+
+    toggleSubField('reqOtherCheckbox', 'reqOtherText');
+    toggleSubField('issueCheckbox', 'issueReasonField');
+    toggleSubField('issueOtherCheckbox', 'issueOtherText');
+    toggleSubField('supportOtherCheckbox', 'supportOtherText');
+
+    function createProductBlock(i) {
+      const div = document.createElement('div');
+      div.className = 'product-block';
+      div.id = `productBlock${i}`;
+
+      div.innerHTML = `
+        <div class="product-title">【${i}商材目】</div>
+
+        <div class="form-group">
+          <label class="required" for="productName${i}">商品名</label>
+          <input type="text" id="productName${i}" name="product_name_${i}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="productUrl${i}">商品URL</label>
+          <input type="url" id="productUrl${i}" name="product_url_${i}" placeholder="https://example.com/item">
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="productCategory${i}">カテゴリ</label>
+          <input type="text" id="productCategory${i}" name="product_category_${i}" placeholder="例：食品、化粧品、雑貨、サプリメントなど" required>
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="productTarget${i}">用途と対象物</label>
+          <input type="text" id="productTarget${i}" name="product_target_${i}" placeholder="例：動物用健康サプリメント" required>
+        </div>
+
+        <div class="form-group">
+          <label for="productIngredients${i}">原材料</label>
+          <span class="hint">※食品や化粧品、薬品等の場合、すべての成分をご記載ください。</span>
+          <textarea id="productIngredients${i}" name="product_ingredients_${i}"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="productSpec${i}">1商品あたりの包装仕様</label>
+          <input type="text" id="productSpec${i}" name="product_spec_${i}" placeholder="例：サイズ・重量など" required>
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="productExpiry${i}">賞味期限・消費期限</label>
+          <input type="text" id="productExpiry${i}" name="product_expiry_${i}" placeholder="例：製造より1年" required>
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="productFacility${i}">製造施設名</label>
+          <span class="hint">※製造・加工・包装・保管のいずれかを担っているすべての施設をご記載ください。</span>
+          <textarea id="productFacility${i}" name="product_facility_${i}" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="productTemp${i}">温度管理の必要性の有無</label>
+          <input type="text" id="productTemp${i}" name="product_temp_${i}" placeholder="例：10℃以下の冷蔵保管が必要 / 常温保管で問題なし" required>
+        </div>
+      `;
+
+      return div;
+    }
+
+    function renderProductBlocks(count) {
+      container.innerHTML = '';
+      for (let i = 1; i <= count; i++) {
+        container.appendChild(createProductBlock(i));
+      }
+      updateProductUndecided();
+    }
+
+    productCountSelect.addEventListener('change', (e) => {
+      renderProductBlocks(parseInt(e.target.value, 10));
+    });
+
+    function updateProductUndecided() {
+      const isUndecided = productUndecided.checked;
+      productInputArea.classList.toggle('is-disabled', isUndecided);
+
+      const fields = productInputArea.querySelectorAll('input, textarea, select');
+      fields.forEach(field => {
+        if (isUndecided) {
+          field.dataset.wasRequired = field.required ? 'true' : 'false';
+          field.required = false;
+          field.disabled = true;
+        } else {
+          field.disabled = false;
+          if (field.dataset.wasRequired === 'true') {
+            field.required = true;
+          }
+        }
+      });
+    }
+
+    productUndecided.addEventListener('change', updateProductUndecided);
+
+    function formDataToObject(form) {
+      const formData = new FormData(form);
+      const data = {};
+
+      for (const [key, value] of formData.entries()) {
+        if (data[key]) {
+          if (Array.isArray(data[key])) {
+            data[key].push(value);
+          } else {
+            data[key] = [data[key], value];
+          }
+        } else {
+          data[key] = value;
+        }
+      }
+
+      Object.keys(data).forEach(key => {
+        if (Array.isArray(data[key])) {
+          data[key] = data[key].join(' / ');
+        }
+      });
+
+      if (productUndecided.checked) {
+        data.product_undecided = '未定';
+        data.product_count = '0';
+      }
+
+      return data;
+    }
+
+    document.getElementById('fdaForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const submitButton = document.getElementById('submitButton');
+      const resultMessage = document.getElementById('resultMessage');
+
+      submitButton.disabled = true;
+      submitButton.textContent = '送信中...';
+      resultMessage.className = 'result-message';
+      resultMessage.textContent = '';
+
+      try {
+        const payload = formDataToObject(form);
+
+        await fetch(GAS_WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        resultMessage.className = 'result-message success';
+        resultMessage.textContent = '送信が完了しました。ご入力ありがとうございます。';
+
+        form.reset();
+        productCountSelect.value = '1';
+        renderProductBlocks(1);
+        updateExperienceFields();
+        updateProductUndecided();
+
+      } catch (error) {
+        resultMessage.className = 'result-message error';
+        resultMessage.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+        console.error(error);
+
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'この内容で送信する';
+      }
+    });
+
+    updateExperienceFields();
+    renderProductBlocks(1);
+    updateProductUndecided();
+  </script>
+</body>
+</html>
